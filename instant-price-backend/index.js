@@ -20,8 +20,8 @@ app.get("/status", (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  setInterval(() => {
-    console.log("I am alive");
-    ingestCoinGeckoData();
-  }, 5000);
+  // setInterval(() => {
+  //   console.log("I am alive");
+  //   ingestCoinGeckoData();
+  // }, 5000);
 });

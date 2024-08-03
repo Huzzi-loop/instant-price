@@ -1,33 +1,6 @@
+const { cryptoCoins } = require("../constants");
 const connectToDatabase = require("../db/conn");
 const coinGeckoApi = require("../external/coingecko");
-
-const cryptoCoins = [
-  {
-    name: "Bitcoin",
-    id: "bitcoin",
-    symbol: "btc",
-  },
-  {
-    name: "Ethereum",
-    id: "ethereum",
-    symbol: "eth",
-  },
-  {
-    name: "binancecoin",
-    id: "binancecoin",
-    symbol: "bnb",
-  },
-  {
-    name: "Dogecoin",
-    id: "dogecoin",
-    symbol: "doge",
-  },
-  {
-    name: "Shiba Inu",
-    id: "shiba-inu",
-    symbol: "shib",
-  },
-];
 
 async function ingestCoinGeckoData() {
   try {
@@ -42,8 +15,6 @@ async function ingestCoinGeckoData() {
     });
     let collection = await db.collection("coindex");
     let result = await collection.insertMany(data);
-
-    console.log(result);
   } catch (err) {
     console.error(err);
     // throw new Error(err);
