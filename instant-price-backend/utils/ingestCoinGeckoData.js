@@ -1,6 +1,7 @@
 const { cryptoCoins } = require("../constants");
 const connectToDatabase = require("../db/conn");
 const coinGeckoApi = require("../external/coingecko");
+require("dotenv").config();
 
 async function ingestCoinGeckoData() {
   try {
@@ -13,7 +14,7 @@ async function ingestCoinGeckoData() {
         vs_currency: "inr",
       },
     });
-    let collection = await db.collection("coindex");
+    let collection = await db.collection(process.env.MONGO_COLLECTION);
     let result = await collection.insertMany(data);
   } catch (err) {
     console.error(err);

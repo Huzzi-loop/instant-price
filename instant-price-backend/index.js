@@ -39,7 +39,7 @@ io.on("connection", (socket) => {
     // Start emitting data to the client every 2 seconds
     interval = setInterval(async () => {
       const db = await connectToDatabase();
-      let collection = await db.collection("coindex");
+      let collection = await db.collection(process.env.MONGO_COLLECTION);
 
       const records = await collection
         .find({ id: cryptoData.id })
