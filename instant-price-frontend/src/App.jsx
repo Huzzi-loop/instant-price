@@ -7,6 +7,8 @@ import CryptoTable from "./components/CryptoTable";
 import { useDisclosure } from "@mantine/hooks";
 import CryptoForm from "./components/CryptoForm";
 import client from "./client";
+import { useDispatch } from "react-redux";
+import { updateList } from "./redux/slices/coins";
 
 function App() {
   const [
@@ -14,10 +16,14 @@ function App() {
     { open: openCryptotForm, close: closeCryptotForm },
   ] = useDisclosure(false);
 
+  const dispatch = useDispatch();
+
   const fetchCryptoList = async () => {
     try {
       const { data: res, status } = await client.get("/crypto-list");
-      console.log(res);
+      if (status === 200) {
+        dispatch(updateList(res));
+      }
     } catch (err) {
       console.log(err);
     }

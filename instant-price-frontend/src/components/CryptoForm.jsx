@@ -1,7 +1,17 @@
 import { Autocomplete, Button, Modal, Stack, Title } from "@mantine/core";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { selectCoin } from "../redux/slices/coins";
 
 function CryptoForm({ opened, close }) {
+  const { list, selectedCoin } = useSelector((state) => state.coins);
+  const dispatch = useDispatch();
+
+  const onSubmit = (value) => {
+    dispatch(selectCoin(value));
+    close();
+  };
+
   return (
     <Modal
       opened={opened}
@@ -13,13 +23,10 @@ function CryptoForm({ opened, close }) {
     >
       <Stack gap="md">
         <Autocomplete
-          data={["React", "Angular", "Vue", "Svelte"]}
+          data={list.map((coin) => coin.name)}
           placeholder="Pick value or enter anything"
+          onOptionSubmit={onSubmit}
         />
-
-        <Button type="submit" variant="filled" size="sm">
-          Save
-        </Button>
       </Stack>
     </Modal>
   );

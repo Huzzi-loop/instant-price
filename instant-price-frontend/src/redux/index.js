@@ -2,7 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { thunk } from "redux-thunk";
-import { CoinsReducer } from "./slices/coins";
+import CoinsReducer from "./slices/coins";
 
 const persistConfig = {
   key: "root",
@@ -12,7 +12,6 @@ const persistConfig = {
 const persistedReducer = persistReducer(
   persistConfig,
   combineReducers({
-    // system:
     coins: CoinsReducer,
   })
 );
