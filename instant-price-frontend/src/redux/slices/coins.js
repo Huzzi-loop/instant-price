@@ -18,6 +18,7 @@ export const CoinsReducer = createSlice({
       return { ...state, selectedCoin: selectedCoin };
     },
     setCoinData: (state, { payload }) => {
+      console.log(payload);
       return { ...state, coinData: payload };
     },
     resetState: (state) => {

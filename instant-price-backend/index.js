@@ -47,11 +47,9 @@ io.on("connection", (socket) => {
         .limit(20)
         .toArray();
 
-      const data = {
-        ...records,
-      };
+      const data = Array.isArray(records) ? records : Array.from(records);
       socket.emit("data", data);
-    }, 3000);
+    }, 2500);
   });
 
   socket.on("disconnect", () => {
@@ -62,8 +60,8 @@ io.on("connection", (socket) => {
 
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  // setInterval(() => {
-  //   console.log("I am alive");
-  //   ingestCoinGeckoData();
-  // }, 5000);
+  setInterval(() => {
+    console.log("I am alive");
+    ingestCoinGeckoData();
+  }, 5000);
 });
